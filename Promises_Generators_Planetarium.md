@@ -22,17 +22,6 @@
 1. Use Co everywhere.
 
 
-
-# Application Process
-
-1. Check the local cache first
-1. Do a wikipedia search
-1. Do an OMDB search
-1. Do a TTS API search
-1. Store the search results in the local cache
-
-
-
 # Webpack Installation
 
 1. `npm install webpack -g`
@@ -457,4 +446,49 @@ function searchHandler (event) {
 {{#if error}}
 	<p>A search error occured: {{errorMsg}}</p>
 {{/if}}
+```
+
+
+
+# Introduce Co
+
+1. `npm install co --save-dev`.
+1. In **index.js**, add `import co from '../node_modules/co';` at the top.
+1. Replace searchHandler with this:
+```
+function searchHandler (event) {
+  if (event.which !== 13) {
+    return;
+  }
+
+  var query = $(this).val();
+  if (!query) {
+    renderResults({});
+  }
+
+  var model = {searching: true};
+  renderResults(model);
+
+  co(function* () {
+    var movieResponse = yield getJSON('http://www.omdbapi.com', {
+      t: query,
+      plot: 'full',
+      r: 'json',
+      tomatoes: true
+    });
+
+    if (movieResponse.Poster === 'N/A') delete movieResponse.Poster;
+    model.movieResult = movieResponse;
+    renderResults(model);
+
+    model.tvSeriesResult = yield getJSON('http://www.omdbapi.com', {
+      s: query,
+      type: 'series',
+      r: 'json'
+    });
+
+    model.searching = false;
+    renderResults(model);
+  });
+}
 ```

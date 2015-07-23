@@ -1,6 +1,8 @@
 import mainTemplate from './templates/content.hbs';
 import resultsTemplate from './templates/results.hbs';
 
+import co from '../node_modules/co';
+
 $('body').html(mainTemplate());
 $('.search-field').keypress(searchHandler);
 
@@ -23,35 +25,52 @@ function searchHandler (event) {
   var model = {searching: true};
   renderResults(model);
 
-  var movieSearch = getJSON('http://www.omdbapi.com', {
-    t: query,
-    plot: 'full',
-    r: 'json',
-    tomatoes: true
-  });
-  var tvSeriesSearch = getJSON('http://www.omdbapi.com', {
-    s: query,
-    type: 'series',
-    r: 'json'
-  });
+  // promises in series example
+  co(function* () {
+    var movieResponse = yield getJSON('http://www.omdbapi.com', {
+      t: query,
+      plot: 'full',
+      r: 'json',
+      tomatoes: true
+    });
 
-  movieSearch.then(function (response) {
-    if (response.Poster === 'N/A') delete response.Poster;
-    model.movieResult = response;
+    if (movieResponse.Poster === 'N/A') delete movieResponse.Poster;
+    model.movieResult = movieResponse;
     renderResults(model);
-  });
 
-  tvSeriesSearch.then(function (response) {
-    model.tvSeriesResult = response;
-    renderResults(model);
-  });
+    model.tvSeriesResult = yield getJSON('http://www.omdbapi.com', {
+      s: query,
+      type: 'series',
+      r: 'json'
+    });
 
-  Promise.all([movieSearch, tvSeriesSearch]).then(function () {
     model.searching = false;
     renderResults(model);
-  }).catch(function (err) {
-    renderResults({error: true, errorMsg: err});
   });
+
+  // promises in parallel example
+  // co(function* () {
+  //   var responses = yield {
+  //     movie: getJSON('http://www.omdbapi.com', {
+  //       t: query,
+  //       plot: 'full',
+  //       r: 'json',
+  //       tomatoes: true
+  //     }),
+
+  //     tvSeries: getJSON('http://www.omdbapi.com', {
+  //       s: query,
+  //       type: 'series',
+  //       r: 'json'
+  //     })
+  //   };
+
+  //   if (responses.movie.Poster === 'N/A') delete responses.movie.Poster;
+  //   model.movieResult = responses.movie;
+  //   model.tvSeriesResult = responses.tvSeries;
+  //   model.searching = false;
+  //   renderResults(model);
+  // });
 }
 
 
