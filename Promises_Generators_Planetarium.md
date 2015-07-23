@@ -7,19 +7,18 @@
 1. Put in some random js (e.g `console.log('Hello World');`).
 1. Webpack install, with config file but NO loaders. [**](#webpack-installation)
 1. Try it by running `webpack --progress --colors` and then `node build/bundle.js`.
-1. Add index.html. **
-1. Add webpack-dev-server and make it watch for changes. **
-1. Add some ES6 code, with a for-of loop for an iterator. **
-1. Add babel-loader to the Webpack configuration. **
-1. Add generator examples. **
-1. Add jQuery. **
-1. Add Handlebars. **
-1. Add API call to OMDB. **
-1. Make API call into a Promise. **
-1. Add another API call. **
+1. Add index.html. [**](#indexhtml-part-1)
+1. Add webpack-dev-server and make it watch for changes. [**](#webpack-dev-server-setup)
+1. Add some ES6 code, with a for-of loop for an iterator. [**](#es6-for-of-example)
+1. Add babel-loader to the Webpack configuration. [**](#webpack-babel-loader)
+1. Add generator examples. [**](#generator-examples)
+1. Add jQuery. [**](#install-jquery)
+1. Add Handlebars. [**](#handlebars-setup)
+1. Add API call to OMDB. [**](#api-call-to-omdb)
+1. Make API call into an ES6 Promise. [**](#make-api-call-into-a-promise)
+1. Add another API call. [**](#add-another-api-call)
 1. Explain how a generator could be fed a promise.
-1. Introduce Co.
-1. Use Co everywhere.
+1. Introduce Co. [**](#introduce-co)
 
 
 # Webpack Installation
