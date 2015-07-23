@@ -205,7 +205,7 @@ console.log('final a', a);
 {{#if searchFinished}}
 	<p>Search Finished.</p>	
 {{/if}}
-{#if error}}
+{{#if error}}
 	<p>A search error occured: {{errorMsg}}</p>
 {{/if}}
 ```
