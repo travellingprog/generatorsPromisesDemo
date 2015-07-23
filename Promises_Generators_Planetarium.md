@@ -23,6 +23,7 @@
 
 
 # Webpack Installation
+*[(back to top)](#workshop-steps)
 
 1. `npm install webpack -g`
 1. `npm install webpack-dev-server -g`
@@ -44,6 +45,7 @@ module.exports = {
 
 
 # Index.html (part 1)
+*[(back to top)](#workshop-steps)
 
 1. `cd build`
 1. `touch index.html`
@@ -65,6 +67,7 @@ module.exports = {
 
 
 # Webpack-dev-server Setup
+*[(back to top)](#workshop-steps)
 
 1. `npm install webpack-dev-server --save-dev`
 1. Add the following to **package.json**:
@@ -80,6 +83,7 @@ module.exports = {
 
 
 # ES6 for-of example
+*[(back to top)](#workshop-steps)
 
 ```
 var numbers = [5, 27, 923, 17, 923414, 823417];
@@ -95,6 +99,7 @@ for (var number of numbers) {
 
 
 # Webpack babel-loader
+*[(back to top)](#workshop-steps)
 
 1. `npm install babel-core --save-dev`
 1. `npm install babel-loader --save-dev`
@@ -116,6 +121,7 @@ for (var number of numbers) {
 
 
 # Generator examples
+*[(back to top)](#workshop-steps)
 
 1. Copy **node_modules/babel-core/browser-polyfill.min.js** to a new **build/libs** folder.
 1. In **index.html**, add `<script src="libs/browser-polyfill.min.js"></script>` BEFORE loading bundle.js.
@@ -173,6 +179,7 @@ console.log('final a', a);
 
 
 # Install jQuery
+*[(back to top)](#workshop-steps)
 
 1. Go to https://jquery.com/download/.
 1. Download **jQuery.min.js** inside the **build/libs/** folder.
@@ -181,6 +188,7 @@ console.log('final a', a);
 
 
 # Handlebars setup
+*[(back to top)](#workshop-steps)
 
 1. Create the following Handlebars file **src/templates/content.hbs**:
 ```
@@ -314,6 +322,7 @@ function getJSON (url, params, callback) {
 
 
 # Make API call into a promise
+*[(back to top)](#workshop-steps)
 
 1. Change the *getJSON()* method to this:
 ```
@@ -358,6 +367,7 @@ function getJSON (url, params) {
 
 
 # Add Another API call
+*[(back to top)](#workshop-steps)
 
 1. Change *searchHandler()* to this:
 ```
@@ -451,6 +461,7 @@ function searchHandler (event) {
 
 
 # Introduce Co
+*[(back to top)](#workshop-steps)
 
 1. `npm install co --save-dev`.
 1. In **index.js**, add `import co from '../node_modules/co';` at the top.
