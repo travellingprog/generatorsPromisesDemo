@@ -17,7 +17,7 @@
 1. Add API call to OMDB. [**](#api-call-to-omdb)
 1. Make API call into an ES6 Promise. [**](#make-api-call-into-a-promise)
 1. Add another API call. [**](#add-another-api-call)
-1. Explain how a generator could be fed a promise.
+1. Explain how a generator could return promises. [**](#generator-return-promises-example)
 1. Introduce Co. [**](#introduce-co)
 1. External Links [**](#external-links)
 
@@ -461,6 +461,31 @@ function searchHandler (event) {
 
 
 
+# Generator returning promises example
+*[(back to top)](#workshop-steps)*
+
+```
+function* myPromiseYielder () {
+  var dataOne = yield getRequest('one');
+  var dataTwo = yield getRequest('two');
+}
+
+var iter = myPromiseYielder();
+var response = iter.next();
+
+var firstPromise = response.value;
+
+firstPromise.then(function (retValueOne) {
+  response = iter.next(retValueOne);
+  return response.value;
+}).then(function (retValueTwo) {
+  iter.next(retValueTwo)
+});
+```
+
+
+
+
 # Introduce Co
 *[(back to top)](#workshop-steps)*
 
@@ -483,25 +508,30 @@ function searchHandler (event) {
 
   // promises in series example
   co(function* () {
-    var movieResponse = yield getJSON('http://www.omdbapi.com', {
-      t: query,
-      plot: 'full',
-      r: 'json',
-      tomatoes: true
-    });
+    try {
+      var movieResponse = yield getJSON('http://www.omdbapi.com', {
+        t: query,
+        plot: 'full',
+        r: 'json',
+        tomatoes: true
+      });
 
-    if (movieResponse.Poster === 'N/A') delete movieResponse.Poster;
-    model.movieResult = movieResponse;
-    renderResults(model);
+      if (movieResponse.Poster === 'N/A') delete movieResponse.Poster;
+      model.movieResult = movieResponse;
+      renderResults(model);
 
-    model.tvSeriesResult = yield getJSON('http://www.omdbapi.com', {
-      s: query,
-      type: 'series',
-      r: 'json'
-    });
+      model.tvSeriesResult = yield getJSON('http://www.omdbapi.com', {
+        s: query,
+        type: 'series',
+        r: 'json'
+      });
 
-    model.searching = false;
-    renderResults(model);
+      model.searching = false;
+      renderResults(model);
+      
+    } catch (err) {
+      renderResults({error: true, errorMsg: err});
+    }
   });
 
   // promises in parallel example

@@ -27,25 +27,30 @@ function searchHandler (event) {
 
   // promises in series example
   co(function* () {
-    var movieResponse = yield getJSON('http://www.omdbapi.com', {
-      t: query,
-      plot: 'full',
-      r: 'json',
-      tomatoes: true
-    });
+    try {
+      var movieResponse = yield getJSON('http://www.omdbapi.com', {
+        t: query,
+        plot: 'full',
+        r: 'json',
+        tomatoes: true
+      });
 
-    if (movieResponse.Poster === 'N/A') delete movieResponse.Poster;
-    model.movieResult = movieResponse;
-    renderResults(model);
+      if (movieResponse.Poster === 'N/A') delete movieResponse.Poster;
+      model.movieResult = movieResponse;
+      renderResults(model);
 
-    model.tvSeriesResult = yield getJSON('http://www.omdbapi.com', {
-      s: query,
-      type: 'series',
-      r: 'json'
-    });
+      model.tvSeriesResult = yield getJSON('http://www.omdbapi.com', {
+        s: query,
+        type: 'series',
+        r: 'json'
+      });
 
-    model.searching = false;
-    renderResults(model);
+      model.searching = false;
+      renderResults(model);
+      
+    } catch (err) {
+      renderResults({error: true, errorMsg: err});
+    }
   });
 
   // promises in parallel example
