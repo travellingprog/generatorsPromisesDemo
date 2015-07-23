@@ -5,7 +5,7 @@
 1. Create src/ and build/.
 1. Add src/index.js: `cd src && touch index.js`.
 1. Put in some random js (e.g `console.log('Hello World');`).
-1. Webpack install, with config file but NO loaders. **
+1. Webpack install, with config file but NO loaders. [**](#webpack-installation)
 1. Try it by running `webpack --progress --colors` and then `node build/bundle.js`.
 1. Add index.html. **
 1. Add webpack-dev-server and make it watch for changes. **
@@ -469,6 +469,7 @@ function searchHandler (event) {
   var model = {searching: true};
   renderResults(model);
 
+  // promises in series example
   co(function* () {
     var movieResponse = yield getJSON('http://www.omdbapi.com', {
       t: query,
@@ -490,5 +491,29 @@ function searchHandler (event) {
     model.searching = false;
     renderResults(model);
   });
+
+  // promises in parallel example
+  // co(function* () {
+  //   var responses = yield {
+  //     movie: getJSON('http://www.omdbapi.com', {
+  //       t: query,
+  //       plot: 'full',
+  //       r: 'json',
+  //       tomatoes: true
+  //     }),
+
+  //     tvSeries: getJSON('http://www.omdbapi.com', {
+  //       s: query,
+  //       type: 'series',
+  //       r: 'json'
+  //     })
+  //   };
+
+  //   if (responses.movie.Poster === 'N/A') delete responses.movie.Poster;
+  //   model.movieResult = responses.movie;
+  //   model.tvSeriesResult = responses.tvSeries;
+  //   model.searching = false;
+  //   renderResults(model);
+  // });
 }
 ```
