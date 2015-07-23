@@ -23,7 +23,7 @@
 
 
 # Webpack Installation
-*[(back to top)](#workshop-steps)
+*[(back to top)](#workshop-steps)*
 
 1. `npm install webpack -g`
 1. `npm install webpack-dev-server -g`
