@@ -1,0 +1,39 @@
+{{#if searching}}
+	<p>Loading...</p>
+{{/if}}
+{{#if movieResult}}
+	{{#if movieResult.Error}}
+		<p>No Movie Found!</p>
+	{{else}}
+		{{#with movieResult}}
+		{{#if Poster}}
+		<p><img src="{{Poster}}" alt="movie poster"></p>
+		{{/if}}
+		<p>movie search result: <strong>{{Title}}</strong></p>
+		<p>{{Plot}}</p>
+		<ul>
+			<li>Starring: {{Actors}}</li>
+			<li>Directed By: {{Director}}</li>
+			<li>Runtime: {{Runtime}}</li>
+			<li>Year: {{Year}}</li>
+			<li>Language: {{Language}}</li>
+			<li>Ratings: {{imdbRating}} (IMDB), {{tomatoMeter}} (Rotten Tomatoes)</li>
+		</ul>
+		{{/with}}
+	{{/if}}
+{{/if}}
+{{#if tvSeriesResult}}
+	{{#if tvSeriesResult.Error}}
+		<p>No TV Series Found!</p>
+	{{else}}
+		<p><strong>top TV series results: </p>
+		<ul>
+		{{#each tvSeriesResult.Search}}
+			<li>{{this.Title}} ({{this.Year}})
+		{{/each}}
+		</ul>
+	{{/if}}
+{{/if}}
+{{#if error}}
+	<p>A search error occured: {{errorMsg}}</p>
+{{/if}}
