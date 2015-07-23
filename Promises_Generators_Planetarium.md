@@ -17,7 +17,7 @@
 1. Add API call to OMDB. [**](#api-call-to-omdb)
 1. Make API call into an ES6 Promise. [**](#make-api-call-into-a-promise)
 1. Add another API call. [**](#add-another-api-call)
-1. Explain how a generator could return promises. [**](#generator-return-promises-example)
+1. Explain how a generator could return promises. [**](#generator-returning-promises-example)
 1. Introduce Co. [**](#introduce-co)
 1. External Links [**](#external-links)
 
