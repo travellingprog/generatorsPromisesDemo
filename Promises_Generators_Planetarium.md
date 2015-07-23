@@ -19,6 +19,7 @@
 1. Add another API call. [**](#add-another-api-call)
 1. Explain how a generator could be fed a promise.
 1. Introduce Co. [**](#introduce-co)
+1. External Links
 
 
 # Webpack Installation
@@ -528,3 +529,13 @@ function searchHandler (event) {
   // });
 }
 ```
+
+
+
+# External Links
+*[(back to top)](#workshop-steps)
+
+* [Mozilla blog series: ES6 In-Depth](https://hacks.mozilla.org/category/es6-in-depth/)
+* [Co library's GitHub page](https://github.com/tj/co)
+* [MDN's reference page of ES6 Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+* [A Study on Solving Callbacks with JavaScript Generators (June 2013)](http://jlongster.com/A-Study-on-Solving-Callbacks-with-JavaScript-Generators)
