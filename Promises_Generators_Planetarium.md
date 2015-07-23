@@ -19,7 +19,7 @@
 1. Add another API call. [**](#add-another-api-call)
 1. Explain how a generator could be fed a promise.
 1. Introduce Co. [**](#introduce-co)
-1. External Links
+1. External Links [**](#external-links)
 
 
 # Webpack Installation
