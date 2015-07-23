@@ -368,7 +368,7 @@ function getJSON (url, params) {
 
 
 # Add Another API call
-*[(back to top)](#workshop-steps)
+*[(back to top)](#workshop-steps)*
 
 1. Change *searchHandler()* to this:
 ```
@@ -533,7 +533,7 @@ function searchHandler (event) {
 
 
 # External Links
-*[(back to top)](#workshop-steps)
+*[(back to top)](#workshop-steps)*
 
 * [Mozilla blog series: ES6 In-Depth](https://hacks.mozilla.org/category/es6-in-depth/)
 * [Co library's GitHub page](https://github.com/tj/co)
